@@ -78,6 +78,14 @@ public class ContactMessageController {
 		return ResponseEntity.ok(contactMessageDTO);
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<VRResponse> deleteContactMessage(@PathVariable Long id){
+		contactMessageService.deleteContactMessage(id);
+
+		VRResponse vrResponse=new VRResponse(ResponseMessage.CONTACTMESSAGE_DELETE_RESPONSE_MESSAGE, true);
+		return ResponseEntity.ok(vrResponse);
+	}
+
 
 
 

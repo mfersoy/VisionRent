@@ -37,4 +37,9 @@ public void saveMessage(ContactMessage contactMessage) {
 		return contactMessage;
 	}
 
+	public void deleteContactMessage(Long id) {
+		ContactMessage message= getContactMessage(id);
+		contactMessageRepository.delete(message);
+	}
+
 }
