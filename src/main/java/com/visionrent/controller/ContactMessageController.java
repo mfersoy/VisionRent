@@ -63,6 +63,24 @@ public class ContactMessageController {
 
 		return ResponseEntity.ok(pageDTO);
 	}
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ContactMessageDTO> getMessageWithPath(@PathVariable("id") Long id){
+		ContactMessage contactMessage = contactMessageService.getContactMessage(id);
+		ContactMessageDTO contactMessageDTO = contactMessageMapper.contactMessageToDTO(contactMessage);
+		return ResponseEntity.ok(contactMessageDTO);
+	}
+
+	@GetMapping("/request")
+	public ResponseEntity<ContactMessageDTO> getMessageWithRequestParam(@RequestParam("id") Long id){
+		ContactMessage contactMessage = contactMessageService.getContactMessage(id);
+		ContactMessageDTO contactMessageDTO = contactMessageMapper.contactMessageToDTO(contactMessage);
+		return ResponseEntity.ok(contactMessageDTO);
+	}
+
+
+
+
 	private Page<ContactMessageDTO> getPageDTO(Page<ContactMessage> contactMessagePage){
 
 		Page<ContactMessageDTO> dtoPage= contactMessagePage.map(new java.util.function.Function<ContactMessage, ContactMessageDTO>() {
