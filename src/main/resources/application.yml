@@ -51,8 +51,13 @@ management:
    show-details: always
    
   shutdown:
-   enabled: true 
-  
+   enabled: true
+
+   visionrent:
+     app:
+       jwtSecret: visionRent@!23
+       jwtExpirationMs: 86400000
+
 info:
  application:
   name: 'VisionRent Backend App'  
