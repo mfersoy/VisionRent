@@ -37,9 +37,22 @@ public void saveMessage(ContactMessage contactMessage) {
 		return contactMessage;
 	}
 
+	public void updateContactMessage(Long id, ContactMessage contactMessage) {
+		ContactMessage foundContactMessage= getContactMessage(id);
+
+		foundContactMessage.setName(contactMessage.getName());
+		foundContactMessage.setSubject(contactMessage.getSubject());
+		foundContactMessage.setEmail(contactMessage.getEmail());
+		foundContactMessage.setBody(contactMessage.getBody());
+
+		contactMessageRepository.save(foundContactMessage);
+	}
+
 	public void deleteContactMessage(Long id) {
 		ContactMessage message= getContactMessage(id);
 		contactMessageRepository.delete(message);
 	}
+
+
 
 }

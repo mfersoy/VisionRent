@@ -86,6 +86,18 @@ public class ContactMessageController {
 		return ResponseEntity.ok(vrResponse);
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<VRResponse> updateContactMessage(@PathVariable Long id, @Valid
+	@RequestBody ContactMessageRequest contactMessageRequest) {
+
+		ContactMessage contactMessage = contactMessageMapper.contactMessageRequestToContactMessage(contactMessageRequest);
+		contactMessageService.updateContactMessage(id,contactMessage);
+
+		VRResponse vrResponse=new VRResponse(ResponseMessage.CONTACTMESSAGE_UPDATE_RESPONSE_MESSAGE, true);
+		return ResponseEntity.ok(vrResponse);
+
+	}
+
 
 
 
