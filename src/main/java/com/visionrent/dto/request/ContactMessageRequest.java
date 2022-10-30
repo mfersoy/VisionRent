@@ -14,21 +14,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactMessageRequest {
-
-    @Size(min = 1, max = 50, message = "Your Name '${validatedValue}' must be between {min} and {max} chars long")
+    @Size(min=1,max=50,message="Your Name '${validatedValue}' must be between {min} and {max} chars long")
     @NotBlank(message="Please provide a Name")
-	private String name;
+    private String name;
 
-    @Size(min = 5, max = 50, message = "Subject '${validatedValue}' must be between {min} and {max} chars long")
+    @Size(min=5,max=50,message="Subject '${validatedValue}' must be between {min} and {max} chars long")
     @NotBlank(message="Please provide a Subject")
-	private String subject;
+    private String subject;
 
-    @Size(min = 20, max = 200, message = "Message Body '${validatedValue}' must be between {min} and {max} chars long")
-    @NotBlank(message="Please provide a Body")
-	private String body;
+    @Size(min=20,max=200,message="Message Body '${validatedValue}' must be between {min} and {max} chars long")
+    @NotBlank(message="Please provide a Message Body")
+    private String body;
 
-
-    @Email(message="Please provide a E-Mail")
-	private String email;
+    @Email(message="Please provide a valid Email")
+    private String email;
 
 }

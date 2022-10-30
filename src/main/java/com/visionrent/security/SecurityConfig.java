@@ -1,6 +1,5 @@
 package com.visionrent.security;
 
-import com.visionrent.security.jwt.AuthTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,54 +15,58 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.visionrent.security.jwt.AuthTokenFilter;
+
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-	
-	@Autowired
-	private UserDetailsService userDetailsService;
-	
+
+    @Autowired
+    private UserDetailsService userDetailsService;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    	
-    	http.csrf().disable().//disable etmezseniz POST Yapamazsınız
-    	sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
-        authorizeRequests().
-        antMatchers("/","index.html","/css/*","/js/*","/images/*","/register","/login").permitAll().
-        anyRequest().authenticated();
-        
+
+        http.csrf().disable().//disable etmezseniz POST Yapamazsınız
+                sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().
+                authorizeRequests().
+                antMatchers("/","index.html","/css/*","/js/*","/images/*","/register","/login").permitAll().
+                anyRequest().authenticated();
+
         http.addFilterBefore(authTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        
+
         return http.build();
     }
-    
+
+    @Bean
+    public AuthTokenFilter authTokenFilter() {
+        return new AuthTokenFilter();
+    }
+
+
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
-    	return 
-    			http.getSharedObject(AuthenticationManagerBuilder.class)
-    			.authenticationProvider(authProvider()).build();
+        return
+                http.getSharedObject(AuthenticationManagerBuilder.class)
+                        .authenticationProvider(authProvider()).build();
     }
-    
-    
-    @Bean 
-    public DaoAuthenticationProvider authProvider() {
-    	DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
-    	authenticationProvider.setUserDetailsService(userDetailsService);
-    	authenticationProvider.setPasswordEncoder(passwordEncoder());
-    	return authenticationProvider;
-    }
-    
-   @Bean
-   public  AuthTokenFilter authTokenFilter() {
-	   return new AuthTokenFilter();
-   }
 
-    
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authenticationProvider=new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	return new BCryptPasswordEncoder(10);
+        return new BCryptPasswordEncoder(10);
     }
-    
-    
+
+
 
 }

@@ -1,27 +1,27 @@
 package com.visionrent.service;
 
-import com.visionrent.exception.ResourceNotFoundException;
-import com.visionrent.exception.message.ErrorMessage;
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.visionrent.domain.ContactMessage;
+import com.visionrent.exception.ResourceNotFoundException;
+import com.visionrent.exception.message.ErrorMessage;
 import com.visionrent.repository.ContactMessageRepository;
 
 import lombok.AllArgsConstructor;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
-public class ContactMessageService  {
+public class ContactMessageService {
 
-private ContactMessageRepository contactMessageRepository;	
-	
-public void saveMessage(ContactMessage contactMessage) {
-	contactMessageRepository.save(contactMessage);
-}
+	private ContactMessageRepository contactMessageRepository;
+
+	public void saveMessage(ContactMessage contactMessage) {
+		contactMessageRepository.save(contactMessage);
+	}
 
 	public List<ContactMessage> getAll(){
 		return contactMessageRepository.findAll();
@@ -47,6 +47,7 @@ public void saveMessage(ContactMessage contactMessage) {
 
 		contactMessageRepository.save(foundContactMessage);
 	}
+
 
 	public void deleteContactMessage(Long id) {
 		ContactMessage message= getContactMessage(id);
