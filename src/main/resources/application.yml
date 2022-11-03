@@ -29,6 +29,11 @@ spring:
     properties:
       '[hibernate.format_sql]': true
 
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
 logging:
   file:
     name: logs/visionrent.log

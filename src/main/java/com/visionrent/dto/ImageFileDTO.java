@@ -9,16 +9,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContactMessageDTO {
-	private Long id;
-	
-	private String name;
-
-	private String subject;
-	
-	private String body;
-	
-	private String email;
-	
-
+public class ImageFileDTO {
+   private String name;
+   private String url;
+   private String type;
+   private long size;
 }

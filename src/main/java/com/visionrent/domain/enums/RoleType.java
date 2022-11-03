@@ -7,11 +7,11 @@ public enum RoleType {
 	
 	private String name;
 	
-	public String getName() {
-		return name;
-	}
-
 	private RoleType(String name) {
 		this.name=name;
+	}
+	
+	public String getName() {
+		return name;
 	}
 }

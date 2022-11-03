@@ -31,7 +31,7 @@ public class ImageFile extends BaseEntity {
 	@OneToOne(cascade=CascadeType.ALL)
 	private ImageData imageData;
 	
-    public ImageFile(String name, String type, ImageData imageData ) {
+    public ImageFile(String name,String type,ImageData imageData ) {
     	this.name=name;
     	this.type=type;
     	this.imageData=imageData;
